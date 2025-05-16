@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/header"
 import SideMenu from "@/components/side-menu"
+import Script from "next/script";
 // Import the CartProvider
 import { CartProvider } from "@/context/cart-context"
 
@@ -23,6 +24,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Tag */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-R97RWHFP9Z"></Script>
+        <Script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-R97RWHFP9Z');
+              `,
+            }}
+        />
+      </head>
       <body className={inter.className}>
         <CartProvider>
           <div className="flex flex-col h-screen">
